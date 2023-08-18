@@ -1,0 +1,36 @@
+version: '3.1'
+
+services:
+
+  wordpress:
+    image: wordpress:6.3.0
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    environment:
+      WORDPRESS_DB_HOST: db
+      WORDPRESS_DB_USER: movie
+      WORDPRESS_DB_PASSWORD: movie
+      WORDPRESS_DB_NAME: movie
+      LETSENCRYPT_HOST: movie.zwd.xyz
+      VIRTUAL_HOST: movie.zwd.xyz
+      VIRTUAL_PATH: /
+    volumes:
+      - wordpress:/var/www/html
+
+  db:
+    image: mysql:8.1.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: movie
+      MYSQL_USER: movie
+      MYSQL_PASSWORD: movie
+      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+    volumes:
+      - db:/var/lib/mysql
+
+volumes:
+  wordpress:
+  db:
