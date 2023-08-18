@@ -16,6 +16,7 @@ services:
       WORDPRESS_DB_NAME: movie
       LETSENCRYPT_HOST: movie.zwd.xyz
       VIRTUAL_HOST: movie.zwd.xyz
+      VIRTUAL_PORT: 8081
       VIRTUAL_PATH: /
     volumes:
       - wordpress:/var/www/html
