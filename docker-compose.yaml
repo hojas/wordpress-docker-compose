@@ -1,37 +1,37 @@
-version: '3.1'
-
 services:
-
   wordpress:
-    image: wordpress:6.3.0
-    restart: always
-    ports:
-      - "8081:80"
-    depends_on:
-      - db
+    image: wordpress:6.3.0-php8.2-apache
+    container_name: movie_wordpress
     environment:
-      WORDPRESS_DB_HOST: db
-      WORDPRESS_DB_USER: movie
-      WORDPRESS_DB_PASSWORD: movie
-      WORDPRESS_DB_NAME: movie
-      LETSENCRYPT_HOST: movie.zwd.xyz
+      WORDPRESS_DB_USER: "movie_user"
+      WORDPRESS_DB_PASSWORD: "movie_password"
+      WORDPRESS_DB_NAME: "movie"
       VIRTUAL_HOST: movie.zwd.xyz
-      VIRTUAL_PORT: 8081
-      VIRTUAL_PATH: /
+    depends_on:
+      - mysql
+    ports:
+      - 9000:80
     volumes:
-      - wordpress:/var/www/html
+      - ./data/wordpress:/var/www/html
+    networks:
+      - nginx-proxy_default
 
-  db:
+  mysql:
     image: mysql:8.1.0
-    restart: always
+    container_name: movie_mysql
     environment:
-      MYSQL_DATABASE: movie
-      MYSQL_USER: movie
-      MYSQL_PASSWORD: movie
-      MYSQL_RANDOM_ROOT_PASSWORD: '1'
+      MYSQL_ROOT_PASSWORD: "root_password"
+      MYSQL_DATABASE: "movie"
+      MYSQL_ROOT_HOST: "%"
+      MYSQL_USER: "movie_user"
+      MYSQL_PASSWORD: "movie_password"
+    ports:
+      - 3306:3306
     volumes:
-      - db:/var/lib/mysql
+      - ./data/mysql:/var/lib/mysql
+    networks:
+      - nginx-proxy_default
 
-volumes:
-  wordpress:
-  db:
+networks:
+  nginx-proxy_default:
+    external: true
