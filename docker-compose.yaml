@@ -6,8 +6,9 @@ services:
       WORDPRESS_DB_USER: "movie_user"
       WORDPRESS_DB_PASSWORD: "movie_password"
       WORDPRESS_DB_NAME: "movie"
-      LETSENCRYPT_HOST: www.zuixuanyi.com
-      VIRTUAL_HOST: www.zuixuanyi.com
+      # LETSENCRYPT_HOST: www.zuixuanyi.com
+      # VIRTUAL_HOST: www.zuixuanyi.com
+      VIRTUAL_HOST: localhost
     depends_on:
       - mysql
     ports:
