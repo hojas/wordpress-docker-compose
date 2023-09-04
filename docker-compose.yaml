@@ -1,14 +1,13 @@
 services:
   wordpress:
-    image: wordpress:6.3.0-php8.2-apache
+    image: wordpress:6.3.1-php8.2-apache
     container_name: movie_wordpress
     environment:
       WORDPRESS_DB_USER: "movie_user"
       WORDPRESS_DB_PASSWORD: "movie_password"
       WORDPRESS_DB_NAME: "movie"
-      # LETSENCRYPT_HOST: www.zuixuanyi.com
-      # VIRTUAL_HOST: www.zuixuanyi.com
-      VIRTUAL_HOST: localhost
+      LETSENCRYPT_HOST: www.zuixuanyi.com
+      VIRTUAL_HOST: www.zuixuanyi.com
     depends_on:
       - mysql
     ports:
