@@ -2,6 +2,7 @@ services:
   wordpress:
     image: wordpress:6.3.1-php8.2-apache
     container_name: movie_wordpress
+    restart: always
     environment:
       WORDPRESS_DB_USER: "movie_user"
       WORDPRESS_DB_PASSWORD: "movie_password"
@@ -20,6 +21,7 @@ services:
   mysql:
     image: mysql:8.1.0
     container_name: movie_mysql
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: "root_password"
       MYSQL_DATABASE: "movie"
