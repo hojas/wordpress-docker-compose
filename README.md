@@ -1,3 +1,3 @@
-# wordpress-docker
+# wordpress-docker-compose
 
-Wordpress in Docker.
+Run Wordpress in Docker with one click.
